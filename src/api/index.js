@@ -9,6 +9,7 @@ const instance = Axios.create({
   }
 })
 const getSideList = (value) => instance.get(URLs.getSide, { parmas: { type: value } })
+
 export default {
   getSideList
 }

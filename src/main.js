@@ -9,7 +9,11 @@ import router from './router'
 
 import 'vant/lib/index.css'
 
+import { Sidebar, SidebarItem } from 'vant'
 const app = createApp(App)
+
+app.use(Sidebar)
+app.use(SidebarItem)
 app.use(Tab)
 app.use(Tabs)
 app.use(Search)

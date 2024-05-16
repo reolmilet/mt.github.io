@@ -103,7 +103,6 @@ export default {
   },
   methods: {
     scroll(e) {
-      console.log(e)
       if (e.target.dataset.id) {
         this.index = e.target.dataset.id
       } else if (e.target.parentNode.dataset.id) {
@@ -146,7 +145,9 @@ export default {
   font-size: 10px;
 }
 .TabBar {
-  height: 80px;
+  margin: 0;
+  padding: 0;
+  height: 73px;
   display: flex;
   white-space: nowrap;
   overflow-x: auto;
