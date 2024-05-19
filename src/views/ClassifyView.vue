@@ -34,9 +34,13 @@ export default {
 <template>
   <div calss="top-search">
     <van-search v-model="value" placeholder="请输入搜索关键词" />
-    <TabBar class="tabBar" @change="handleChange" />
-    <div class="sidebar-container">
-      <SideBar :sideList="sideList" />
+    <div class="TabBar">
+      <TabBar class="tabBar" @change="handleChange" />
+    </div>
+    <div class="middle">
+      <div class="sidebar-container">
+        <SideBar :sideList="sideList" />
+      </div>
     </div>
   </div>
 </template>
@@ -57,5 +61,14 @@ export default {
   width: 25%;
   max-height: 480px; /* 你可以根据需要调整这个值 */
   overflow-y: auto;
+}
+.tabBar {
+  padding: 0;
+}
+.middle {
+  position: absolute;
+  top: 19%;
+  width: 100%;
+  height: auto;
 }
 </style>

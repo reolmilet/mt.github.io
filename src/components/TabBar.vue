@@ -147,7 +147,7 @@ export default {
 .TabBar {
   margin: 0;
   padding: 0;
-  height: 73px;
+  /* height: 73px; */
   display: flex;
   white-space: nowrap;
   overflow-x: auto;
