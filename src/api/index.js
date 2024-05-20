@@ -8,8 +8,12 @@ const instance = Axios.create({
     appkey
   }
 })
-const getSideList = (value) => instance.get(URLs.getSide, { parmas: { type: value } })
-
+const getSideList = (value) => instance.get(URLs.getSide, { params: { type: value } })
+const getGoodsList = (value) =>
+  instance.get(URLs.getGoodsList, {
+    params: { type: value.type, page: value.page, size: value.size, sort: value.sort }
+  })
 export default {
-  getSideList
+  getSideList,
+  getGoodsList
 }

@@ -2,22 +2,34 @@
 import { ref } from 'vue'
 import TabBar from '@/components/TabBar.vue'
 import store from '../stores/index'
-
+import goodsBar from '@/components/goodsBar.vue'
 import SideBar from '@/components/SideBar.vue'
 export default {
   components: {
     TabBar,
-    SideBar
+    SideBar,
+    goodsBar
   },
   setup() {
     const value = ref('')
     const sideList = ref([])
     const firstTitle = ref('时令水果')
+    const firstGood = ref([])
+    const goodClass = {
+      type: '苹果',
+      page: 1,
+      size: 10
+    }
     //获取侧边栏数据
     const getSideList = async (value) => {
       await store.dispatch('axiosGetSideList', value)
 
       return store.state.sideList
+    }
+    const getGoodList = async (value) => {
+      await store.dispatch('axiosGetGoodsList', value)
+
+      return store.state.goodList
     }
 
     const handleChange = async (title) => {
@@ -25,8 +37,14 @@ export default {
 
       sideList.value = await getSideList(firstTitle.value)
     }
+    const sideChange = async (title) => {
+      goodClass.type = title
+      firstGood.value = await getGoodList(goodClass)
 
-    return { value, firstTitle, handleChange, sideList }
+      // 这里可以接收到子组件发出的信息
+    }
+
+    return { value, firstTitle, handleChange, sideList, sideChange, firstGood }
   }
 }
 </script>
@@ -39,7 +57,10 @@ export default {
     </div>
     <div class="middle">
       <div class="sidebar-container">
-        <SideBar :sideList="sideList" />
+        <SideBar :sideList="sideList" @change="sideChange" />
+      </div>
+      <div class="goods">
+        <goodsBar :firstGood="firstGood" />
       </div>
     </div>
   </div>
@@ -62,13 +83,17 @@ export default {
   max-height: 480px; /* 你可以根据需要调整这个值 */
   overflow-y: auto;
 }
-.tabBar {
-  padding: 0;
+.goods {
+  width: 74%;
+  max-height: 480px; /* 你可以根据需要调整这个值 */
+  overflow-y: auto;
 }
+
 .middle {
   position: absolute;
   top: 19%;
   width: 100%;
   height: auto;
+  display: flex;
 }
 </style>
