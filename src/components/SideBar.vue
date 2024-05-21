@@ -2,7 +2,7 @@
   <van-sidebar v-model="active">
     <!-- <div v-for="(item, i) in littleSideList.value" :key="i"> -->
     <van-sidebar-item
-      :title="typeof item === 'number' ? '全部' : item"
+      :title="isNaN(item) ? item : '全部'"
       v-for="(item, i) in littleSideList"
       :key="i"
     />

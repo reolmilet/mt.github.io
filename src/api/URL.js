@@ -8,6 +8,6 @@ export const URLs = {
 }
 // const baseURL = 'https://mock.duyiedu.com/mock/12/phone';
 // const baseURL = 'http://localhost:3333/goods/';
-const baseURL = 'https://mallapi.duyiedu.com/goods/'
+const baseURL = 'http://localhost:8080/mtText01_war_exploded/'
 
 export default baseURL

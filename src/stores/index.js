@@ -17,11 +17,13 @@ export default createStore({
   actions: {
     async axiosGetSideList({ commit }, type) {
       const res = await api.getSideList(type)
+
       commit('setSideList', res.data)
     },
     async axiosGetGoodsList({ commit }, value) {
       const res = await api.getGoodsList(value)
-      commit('setGoodList', res.data.list)
+      console.log(res.data)
+      commit('setGoodList', res.data)
     }
   },
   getters: {

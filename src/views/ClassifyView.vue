@@ -40,7 +40,7 @@ export default {
     const sideChange = async (title) => {
       goodClass.type = title
       firstGood.value = await getGoodList(goodClass)
-
+      console.log(firstGood.value)
       // 这里可以接收到子组件发出的信息
     }
 
@@ -79,12 +79,12 @@ export default {
   padding: 0;
 }
 .sidebar-container {
-  width: 25%;
+  width: 21%;
   max-height: 480px; /* 你可以根据需要调整这个值 */
   overflow-y: auto;
 }
 .goods {
-  width: 74%;
+  width: 78%;
   max-height: 480px; /* 你可以根据需要调整这个值 */
   overflow-y: auto;
 }

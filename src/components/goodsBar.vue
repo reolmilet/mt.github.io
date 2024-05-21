@@ -4,15 +4,15 @@
       v-for="(item, i) in goodList"
       :key="i"
       :num="2"
-      :tags="item.tags"
-      :origin-price="item.price"
-      :price="item.price_off"
+      :origin-price="item.price_off"
+      :price="item.price"
       :desc="item.desc"
       :title="item.title"
-      :thumb="item.images[0]"
+      :thumb="JSON.parse(item.images)[0]"
     >
+      <template v-if="item.price_off !== 0" #origin-price>{{ item.price_off }}</template>
       <template #tags>
-        <van-tag plain type="primary" v-for="(tag, i) in item.tags" :key="i">{{ tag }}</van-tag>
+        <van-tag plain type="primary">{{ JSON.parse(item.tag)[0] }}</van-tag>
       </template>
       <template #footer>
         <van-button size="mini">按钮</van-button>
