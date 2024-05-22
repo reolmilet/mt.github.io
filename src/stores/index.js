@@ -4,7 +4,8 @@ import api from '@/api'
 export default createStore({
   state: {
     sideList: [],
-    goodList: []
+    goodList: [],
+    filteredGoodList: []
   },
   mutations: {
     setSideList(state, sideList) {
@@ -12,6 +13,9 @@ export default createStore({
     },
     setGoodList(state, goodList) {
       state.goodList = goodList
+    },
+    setFilteredGoodList(state, filteredGoodList) {
+      state.filteredGoodList = filteredGoodList
     }
   },
   actions: {
@@ -22,7 +26,7 @@ export default createStore({
     },
     async axiosGetGoodsList({ commit }, value) {
       const res = await api.getGoodsList(value)
-      console.log(res.data)
+
       commit('setGoodList', res.data)
     }
   },
@@ -32,6 +36,9 @@ export default createStore({
     },
     getGoodList(state) {
       return state.goodList
+    },
+    getFilteredGoodList(state) {
+      return state.filteredGoodList
     }
   }
 })

@@ -40,7 +40,7 @@ export default {
     const sideChange = async (title) => {
       goodClass.type = title
       firstGood.value = await getGoodList(goodClass)
-      console.log(firstGood.value)
+
       // 这里可以接收到子组件发出的信息
     }
 

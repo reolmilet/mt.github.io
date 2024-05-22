@@ -11,6 +11,7 @@ import 'vant/lib/index.css'
 
 import { Sidebar, SidebarItem } from 'vant'
 const app = createApp(App)
+
 app.use(Tag)
 app.use(Sidebar)
 app.use(SidebarItem)
