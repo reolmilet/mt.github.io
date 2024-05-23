@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { ref, watch, computed } from 'vue'
+import { ref, watch } from 'vue'
 import stores from '@/stores'
 export default {
   props: {
@@ -43,7 +43,7 @@ export default {
 
   setup(props) {
     const goodList = ref([])
-
+    const filteredGoodList = ref(new Set())
     watch(
       () => props.firstGood,
       (newVal) => {
@@ -55,16 +55,21 @@ export default {
         goodList.value[index].count = 0
       }
       goodList.value[index].count++
+      filteredGoodList.value.add(goodList.value[index])
+      console.log(filteredGoodList.value)
     }
     const minus = (index) => {
       if (goodList.value[index].count > 0) {
         goodList.value[index].count--
       }
+      if (goodList.value[index].count === 0) {
+        filteredGoodList.value.delete(goodList.value[index])
+      }
     }
-    const filteredGoodList = computed(() => {
-      return goodList.value.filter((item) => item.count > 0)
-    })
-    watch(filteredGoodList, (newList) => {
+
+    watch(filteredGoodList.value, (newList) => {
+      console.log(filteredGoodList.value)
+      newList = Array.from(filteredGoodList.value)
       stores.commit('setFilteredGoodList', newList)
     })
     return { goodList, plus, minus, filteredGoodList }

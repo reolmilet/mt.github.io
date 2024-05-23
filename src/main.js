@@ -8,10 +8,10 @@ import App from './App.vue'
 import router from './router'
 import { Tag } from 'vant'
 import 'vant/lib/index.css'
-
+import { SubmitBar } from 'vant'
 import { Sidebar, SidebarItem } from 'vant'
 const app = createApp(App)
-
+app.use(SubmitBar)
 app.use(Tag)
 app.use(Sidebar)
 app.use(SidebarItem)
