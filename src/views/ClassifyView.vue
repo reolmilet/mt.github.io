@@ -60,7 +60,7 @@ export default {
         <div class="sidebar-container">
           <SideBar :sideList="sideList" @change="sideChange" />
         </div>
-        <div class="goods">
+        <div class="goods2">
           <goodsBar :firstGood="firstGood" />
         </div>
       </div>
@@ -85,7 +85,7 @@ export default {
   max-height: 480px; /* 你可以根据需要调整这个值 */
   overflow-y: auto;
 }
-.goods {
+.goods2 {
   width: 78%;
   max-height: 480px; /* 你可以根据需要调整这个值 */
   overflow-y: auto;

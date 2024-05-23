@@ -1,42 +1,56 @@
 <script>
 import { showToast } from 'vant'
-
+import { showConfirmDialog } from 'vant'
 import { ref, watch, computed, onUnmounted } from 'vue'
 import stores from '@/stores'
 export default {
   components: {},
   setup() {
-    const onSubmit = () => showToast('点击按钮')
+    const onSubmit = () => showToast('成功提交')
     const goodList = ref([])
+
     goodList.value = stores.state.filteredGoodList
 
     const plus = (index) => {
-      if (!goodList.value[index].count) {
-        goodList.value[index].count = 0
-      }
-      goodList.value[index].count++
+      filteredGoodList.value[index].count++
     }
     const minus = (index) => {
-      if (goodList.value[index].count > 0) {
-        goodList.value[index].count--
-      }
+      filteredGoodList.value[index].count--
     }
-
+    const allPrises = computed(() => {
+      return goodList.value.reduce((total, item) => {
+        return total + item.price * item.count
+      }, 0)
+    })
     const filteredGoodList = computed(() => {
       return goodList.value.filter((item) => item.count > 0)
     })
-    const stopWatch = watch(goodList, (newList) => {
+    const stopWatch = watch(filteredGoodList, (newList) => {
       stores.commit('setFilteredGoodList', newList)
     })
     onUnmounted(() => {
       stopWatch()
     })
+    const clearShopping = () => {
+      showConfirmDialog({
+        title: '清除购物车',
+        message: '您真的要清空购物车吗'
+      })
+        .then(() => {
+          goodList.value = []
+        })
+        .catch(() => {
+          return
+        })
+    }
     return {
       onSubmit,
       goodList,
       plus,
       minus,
-      filteredGoodList
+      filteredGoodList,
+      clearShopping,
+      allPrises
     }
   }
 }
@@ -46,7 +60,12 @@ export default {
   <div class="shopping">
     <div class="top" style="margin: auto; text-align: center; padding: 10px">
       购物车
-      <van-button size="mini" plain type="primary" style="position: absolute; right: 0"
+      <van-button
+        size="mini"
+        plain
+        type="primary"
+        style="position: absolute; right: 0"
+        @click="clearShopping"
         >清空购物车</van-button
       >
     </div>
@@ -84,7 +103,7 @@ export default {
 
     <div class="submit-bar">
       <van-submit-bar
-        :price="3050"
+        :price="allPrises * 100"
         button-text="提交订单"
         @submit="onSubmit"
         style="position: fixed; bottom: 50px"
@@ -94,7 +113,10 @@ export default {
 </template>
 <style>
 .goods {
+  display: flex;
   margin: auto;
+  height: 470px;
+  overflow-y: auto; /* 当内容超出容器的高度时，显示垂直滚动条 */
 }
 .shopping {
   height: 70%;

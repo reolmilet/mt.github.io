@@ -56,7 +56,6 @@ export default {
       }
       goodList.value[index].count++
       filteredGoodList.value.add(goodList.value[index])
-      console.log(filteredGoodList.value)
     }
     const minus = (index) => {
       if (goodList.value[index].count > 0) {
@@ -68,7 +67,6 @@ export default {
     }
 
     watch(filteredGoodList.value, (newList) => {
-      console.log(filteredGoodList.value)
       newList = Array.from(filteredGoodList.value)
       stores.commit('setFilteredGoodList', newList)
     })

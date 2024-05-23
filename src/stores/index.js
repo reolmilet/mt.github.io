@@ -15,7 +15,7 @@ export default createStore({
       state.goodList = goodList
     },
     setFilteredGoodList(state, filteredGoodList) {
-      state.filteredGoodList = filteredGoodList
+      state.filteredGoodList = filteredGoodList.filter((item) => item.count > 0)
     }
   },
   actions: {
