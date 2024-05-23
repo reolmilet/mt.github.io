@@ -12,6 +12,10 @@ export default createStore({
       state.sideList = sideList
     },
     setGoodList(state, goodList) {
+      goodList = goodList.map((item) => {
+        const foundItem = state.filteredGoodList.find((filteredItem) => filteredItem.id === item.id)
+        return foundItem ? foundItem : item
+      })
       state.goodList = goodList
     },
     setFilteredGoodList(state, filteredGoodList) {
