@@ -50,20 +50,22 @@ export default {
 </script>
 
 <template>
-  <div calss="top-search">
-    <van-search v-model="value" placeholder="请输入搜索关键词" />
-    <div class="TabBar">
-      <TabBar class="tabBar" @change="handleChange" />
-    </div>
-    <div class="middle">
-      <div class="sidebar-container">
-        <SideBar :sideList="sideList" @change="sideChange" />
+  <keep-alive>
+    <div calss="top-search">
+      <van-search v-model="value" placeholder="请输入搜索关键词" />
+      <div class="TabBar">
+        <TabBar class="tabBar" @change="handleChange" />
       </div>
-      <div class="goods">
-        <goodsBar :firstGood="firstGood" />
+      <div class="middle">
+        <div class="sidebar-container">
+          <SideBar :sideList="sideList" @change="sideChange" />
+        </div>
+        <div class="goods">
+          <goodsBar :firstGood="firstGood" />
+        </div>
       </div>
     </div>
-  </div>
+  </keep-alive>
 </template>
 <style>
 .top-search {

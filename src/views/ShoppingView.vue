@@ -1,7 +1,7 @@
 <script>
 import { showToast } from 'vant'
 
-import { ref, watch } from 'vue'
+import { ref, watch, computed, onUnmounted } from 'vue'
 import stores from '@/stores'
 export default {
   components: {},
@@ -22,14 +22,21 @@ export default {
       }
     }
 
-    watch(goodList, (newList) => {
+    const filteredGoodList = computed(() => {
+      return goodList.value.filter((item) => item.count > 0)
+    })
+    const stopWatch = watch(goodList, (newList) => {
       stores.commit('setFilteredGoodList', newList)
+    })
+    onUnmounted(() => {
+      stopWatch()
     })
     return {
       onSubmit,
       goodList,
       plus,
-      minus
+      minus,
+      filteredGoodList
     }
   }
 }
@@ -46,7 +53,7 @@ export default {
     <div class="goods">
       <div>
         <van-card
-          v-for="(item, i) in goodList"
+          v-for="(item, i) in filteredGoodList"
           :key="i"
           :price="item.price"
           :desc="item.desc"
@@ -86,6 +93,9 @@ export default {
   </div>
 </template>
 <style>
+.goods {
+  margin: auto;
+}
 .shopping {
   height: 70%;
 }

@@ -24,7 +24,8 @@ const router = createRouter({
     {
       path: '/home/classify',
       name: 'classify',
-      component: ClassifyView
+      component: ClassifyView,
+      meta: { keepAlive: true }
     },
     {
       path: '/about',
