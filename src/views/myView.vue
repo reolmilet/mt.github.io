@@ -11,8 +11,18 @@ export default {
       userName: userName.value,
       passward: passward.value
     }))
-    const signin = () => {
-      console.log(userName.value)
+    const signin = async () => {
+      const match = await stores.dispatch('axiosGetUserData', {
+        userName: userName.value,
+        password: passward.value
+      })
+      console.log(match)
+      if (match == true) {
+        showToast('登录成功')
+        show.value = false
+      } else {
+        showToast('登录失败')
+      }
     }
     const signup = () => {
       const bo = stores.dispatch('axiosSetUserData', {

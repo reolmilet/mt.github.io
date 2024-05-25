@@ -19,9 +19,14 @@ const addUsersServlet = (value) =>
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   })
+const FindUserServlet = (value) =>
+  instance.get(URLs.FindUserServlet, {
+    params: { username: value.userName, password: value.password }
+  })
 
 export default {
   getSideList,
   getGoodsList,
-  addUsersServlet
+  addUsersServlet,
+  FindUserServlet
 }
