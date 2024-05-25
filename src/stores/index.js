@@ -5,7 +5,8 @@ export default createStore({
   state: {
     sideList: [],
     goodList: [],
-    filteredGoodList: []
+    filteredGoodList: [],
+    userData: {}
   },
   mutations: {
     setSideList(state, sideList) {
@@ -20,6 +21,10 @@ export default createStore({
     },
     setFilteredGoodList(state, filteredGoodList) {
       state.filteredGoodList = filteredGoodList.filter((item) => item.count > 0)
+    },
+    setUserData(state, userData) {
+      console.log(userData)
+      state.userData = userData
     }
   },
   actions: {
@@ -32,6 +37,15 @@ export default createStore({
       const res = await api.getGoodsList(value)
 
       commit('setGoodList', res.data)
+    },
+    async axiosSetUserData({ commit }, data) {
+      const response = await api.addUsersServlet(data)
+      console.log(response.data)
+      if (response.data == true) {
+        console.log(data)
+        commit('setUserData', data)
+      }
+      return response.data
     }
   },
   getters: {
@@ -43,6 +57,9 @@ export default createStore({
     },
     getFilteredGoodList(state) {
       return state.filteredGoodList
+    },
+    getUserData(state) {
+      return state.userData
     }
   }
 })

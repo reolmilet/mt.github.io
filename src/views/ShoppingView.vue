@@ -69,6 +69,12 @@ export default {
         >清空购物车</van-button
       >
     </div>
+    <van-empty
+      image="https://fastly.jsdelivr.net/npm/@vant/assets/custom-empty-image.png"
+      image-size="80"
+      description="购物车空空如也"
+      v-if="filteredGoodList.length === 0"
+    />
     <div class="goods">
       <div>
         <van-card

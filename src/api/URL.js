@@ -4,7 +4,8 @@ export const URLs = {
   getGoodsList: '/getGoodsList',
   // '/getgoodsList',
   search: '/search',
-  getGoodsByIds: '/getGoodsByIds'
+  getGoodsByIds: '/getGoodsByIds',
+  addUsersServlet: '/addUsersServlet'
 }
 // const baseURL = 'https://mock.duyiedu.com/mock/12/phone';
 // const baseURL = 'http://localhost:3333/goods/';

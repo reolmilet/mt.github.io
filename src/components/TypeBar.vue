@@ -21,7 +21,6 @@ export default {
       () => stores.state.filteredGoodList,
       (newList) => {
         shoppingList.value = newList
-        console.log(shoppingList.value)
       }
     )
     //const shoppingList = ref(stores.state.filteredGoodList.values)

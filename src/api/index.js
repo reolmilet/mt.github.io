@@ -13,7 +13,15 @@ const getGoodsList = (value) =>
   instance.get(URLs.getGoodsList, {
     params: { type: value.type, page: value.page, size: value.size, sort: value.sort }
   })
+const addUsersServlet = (value) =>
+  instance.post(URLs.addUsersServlet, `username=${value.userName}&password=${value.password}`, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+
 export default {
   getSideList,
-  getGoodsList
+  getGoodsList,
+  addUsersServlet
 }
