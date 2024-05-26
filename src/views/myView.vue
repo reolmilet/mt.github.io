@@ -11,21 +11,22 @@ export default {
       userName: userName.value,
       passward: passward.value
     }))
+    let match = ref(false)
     const signin = async () => {
-      const match = await stores.dispatch('axiosGetUserData', {
+      match.value = await stores.dispatch('axiosGetUserData', {
         userName: userName.value,
         password: passward.value
       })
-      console.log(match)
-      if (match == true) {
+
+      if (match.value == true) {
         showToast('登录成功')
         show.value = false
       } else {
         showToast('登录失败')
       }
     }
-    const signup = () => {
-      const bo = stores.dispatch('axiosSetUserData', {
+    const signup = async () => {
+      const bo = await stores.dispatch('axiosSetUserData', {
         userName: userName.value,
         password: passward.value
       })
@@ -35,14 +36,26 @@ export default {
         showToast('注册失败')
       }
     }
-    return { show, userName, passward, signin, signup, userData }
+
+    return { show, userName, passward, signin, signup, userData, match }
   }
 }
 </script>
 
 <template>
   <div>
-    <van-button type="primary" text="显示遮罩层" @click="show = true" />
+    <div class="myview" style="margin: 0, 0">
+      <van-cell-group>
+        <van-cell title="用户名" :value="match ? userName : '请先登录'" />
+      </van-cell-group>
+      <van-button
+        type="primary"
+        text="登录"
+        @click="show = true"
+        style="display: block; margin: 0 auto"
+      />
+    </div>
+
     <van-overlay :show="show" @click="show = false">
       <div class="wrapper">
         <div class="block" @click.stop>

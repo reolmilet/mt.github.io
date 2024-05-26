@@ -23,10 +23,17 @@ const FindUserServlet = (value) =>
   instance.get(URLs.FindUserServlet, {
     params: { username: value.userName, password: value.password }
   })
+const addCardsServlet = (filteredGoodList) =>
+  instance.post(URLs.addCardsServlet, JSON.stringify(filteredGoodList), {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
 
 export default {
   getSideList,
   getGoodsList,
   addUsersServlet,
-  FindUserServlet
+  FindUserServlet,
+  addCardsServlet
 }

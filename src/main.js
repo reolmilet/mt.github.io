@@ -14,8 +14,10 @@ import { Empty } from 'vant'
 import { Overlay } from 'vant'
 import { Field, CellGroup } from 'vant'
 import { Toast } from 'vant'
+import { Cell } from 'vant'
 import { Sidebar, SidebarItem } from 'vant'
 const app = createApp(App)
+app.use(Cell)
 app.use(Toast)
 app.use(CellGroup)
 app.use(Field)

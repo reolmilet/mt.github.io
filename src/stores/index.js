@@ -7,7 +7,8 @@ export default createStore({
     goodList: [],
     filteredGoodList: [],
     userData: {},
-    signin: {}
+    signin: {},
+    match: 'false'
   },
   mutations: {
     setSideList(state, sideList) {
@@ -28,6 +29,9 @@ export default createStore({
     },
     setSignin(state, signin) {
       state.signin = signin
+    },
+    setMatch(state, match) {
+      state.match = match
     }
   },
   actions: {
@@ -51,8 +55,16 @@ export default createStore({
     async axiosGetUserData({ commit }, value) {
       const res = await api.FindUserServlet(value)
 
-      commit('setSignin', res.data)
+      commit('setSignin', res.data.userdata)
+      commit('setMatch', res.data.match)
       return res.data.match
+    },
+    async axiosSetFilteredGoodList({ commit }, filteredGoodList) {
+      const response = await api.addCardsServlet(filteredGoodList)
+      if (response.data == true) {
+        commit('setFilteredGoodList', [])
+      }
+      return response.data
     }
   },
   getters: {

@@ -6,7 +6,8 @@ export const URLs = {
   search: '/search',
   getGoodsByIds: '/getGoodsByIds',
   addUsersServlet: '/addUsersServlet',
-  FindUserServlet: '/FindUserServlet'
+  FindUserServlet: '/FindUserServlet',
+  addCardsServlet: '/addCardsServlet'
 }
 // const baseURL = 'https://mock.duyiedu.com/mock/12/phone';
 // const baseURL = 'http://localhost:3333/goods/';

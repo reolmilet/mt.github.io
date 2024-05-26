@@ -6,7 +6,20 @@ import stores from '@/stores'
 export default {
   components: {},
   setup() {
-    const onSubmit = () => showToast('成功提交')
+    const onSubmit = () => {
+      let transformedFilteredGoodList = filteredGoodList.value.map((item) => ({
+        user_id: stores.state.signin.id,
+        product_id: item.id,
+        quantity: item.count
+      }))
+
+      const bo = stores.dispatch('axiosSetFilteredGoodList', transformedFilteredGoodList)
+      if (bo) {
+        showToast('成功提交')
+      } else {
+        showToast('提交失败')
+      }
+    }
     const goodList = ref([])
 
     goodList.value = stores.state.filteredGoodList
