@@ -7,10 +7,13 @@ export default {
     const show = ref(false)
     const userName = ref('')
     const passward = ref('')
-    const userData = computed(() => ({
-      userName: userName.value,
-      passward: passward.value
-    }))
+    const usernameed = computed(() => {
+      return stores.state.signin.username
+    })
+    const matched = computed(() => {
+      console.log(stores.state.match)
+      return stores.state.match
+    })
     let match = ref(false)
     const signin = async () => {
       match.value = await stores.dispatch('axiosGetUserData', {
@@ -37,7 +40,7 @@ export default {
       }
     }
 
-    return { show, userName, passward, signin, signup, userData, match }
+    return { show, userName, passward, signin, signup, usernameed, match, matched }
   }
 }
 </script>
@@ -46,7 +49,7 @@ export default {
   <div>
     <div class="myview" style="margin: 0, 0">
       <van-cell-group>
-        <van-cell title="用户名" :value="match ? userName : '请先登录'" />
+        <van-cell title="用户名" :value="matched ? usernameed : '请先登录'" />
       </van-cell-group>
       <van-button
         type="primary"

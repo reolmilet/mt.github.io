@@ -16,6 +16,7 @@ export default {
       const bo = stores.dispatch('axiosSetFilteredGoodList', transformedFilteredGoodList)
       if (bo) {
         showToast('成功提交')
+        goodList.value = []
       } else {
         showToast('提交失败')
       }
