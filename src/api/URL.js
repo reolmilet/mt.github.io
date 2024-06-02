@@ -4,10 +4,13 @@ export const URLs = {
   getGoodsList: '/getGoodsList',
   // '/getgoodsList',
   search: '/search',
-  getGoodsByIds: '/getGoodsByIds'
+  getGoodsByIds: '/getGoodsByIds',
+  addUsersServlet: '/addUsersServlet',
+  FindUserServlet: '/FindUserServlet',
+  addCardsServlet: '/addCardsServlet'
 }
 // const baseURL = 'https://mock.duyiedu.com/mock/12/phone';
 // const baseURL = 'http://localhost:3333/goods/';
-const baseURL = 'https://mallapi.duyiedu.com/goods/'
+const baseURL = 'http://localhost:8080/mtText01_war_exploded/'
 
 export default baseURL
