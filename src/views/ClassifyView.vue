@@ -27,7 +27,7 @@ export default {
       return store.state.sideList
     }
     const getGoodList = async (value) => {
-      await store.dispatch('axiosGetGoodsList', value)
+      await store.dispatch('axiosoriginGoodList', value)
 
       return store.state.goodList
     }
@@ -36,6 +36,8 @@ export default {
       firstTitle.value = title // 这里可以接收到子组件发出的信息
 
       sideList.value = await getSideList(firstTitle.value)
+      goodClass.type = sideList.value[0]
+      firstGood.value = await getGoodList(goodClass)
     }
     const sideChange = async (title) => {
       goodClass.type = title

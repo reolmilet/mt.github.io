@@ -4,18 +4,19 @@ import api from '@/api'
 export default createStore({
   state: {
     sideList: [],
-    goodList: [],
+    goodList: [], //传给视图层的数据
     filteredGoodList: [],
     userData: {},
     signin: {},
-    match: 'false'
+    match: 'false',
+    originGoodList: [] //获取数据库的原始数据
   },
   mutations: {
     setSideList(state, sideList) {
       state.sideList = sideList
     },
     setGoodList(state, goodList) {
-      goodList = goodList.map((item) => {
+      goodList = state.originGoodList.map((item) => {
         const foundItem = state.filteredGoodList.find((filteredItem) => filteredItem.id === item.id)
         return foundItem ? foundItem : item
       })
@@ -32,6 +33,9 @@ export default createStore({
     },
     setMatch(state, match) {
       state.match = match
+    },
+    setOriginGoodList(state, originGoodList) {
+      state.originGoodList = originGoodList
     }
   },
   actions: {
@@ -40,9 +44,10 @@ export default createStore({
 
       commit('setSideList', res.data)
     },
-    async axiosGetGoodsList({ commit }, value) {
+    async axiosoriginGoodList({ commit }, value) {
       const res = await api.getGoodsList(value)
 
+      commit('setOriginGoodList', res.data)
       commit('setGoodList', res.data)
     },
     async axiosSetUserData({ commit }, data) {
@@ -82,6 +87,12 @@ export default createStore({
     },
     getSignin(state) {
       return state.signin
+    },
+    getMatch(state) {
+      return state.match
+    },
+    getOriginGoodList(state) {
+      return state.originGoodList
     }
   }
 })

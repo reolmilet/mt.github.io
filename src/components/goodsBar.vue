@@ -50,12 +50,29 @@ export default {
         goodList.value = [...newVal]
       }
     )
+    // const plus = (index) => {
+    //   if (!goodList.value[index].count) {
+    //     goodList.value[index].count = 0
+    //   }
+    //   goodList.value[index].count++
+    //   filteredGoodList.value.add(goodList.value[index])
+    //   stores.commit('setFilteredGoodList', Array.from(filteredGoodList.value))
+    //   console.log(filteredGoodList.value)
+    // }
     const plus = (index) => {
       if (!goodList.value[index].count) {
         goodList.value[index].count = 0
       }
       goodList.value[index].count++
-      filteredGoodList.value.add(goodList.value[index])
+      if (
+        !Array.from(filteredGoodList.value).some(
+          (item) => JSON.stringify(item) === JSON.stringify(goodList.value[index])
+        )
+      ) {
+        filteredGoodList.value.add(goodList.value[index])
+      }
+      stores.commit('setFilteredGoodList', Array.from(filteredGoodList.value))
+      console.log(filteredGoodList.value)
     }
     const minus = (index) => {
       if (goodList.value[index].count > 0) {
@@ -64,12 +81,25 @@ export default {
       if (goodList.value[index].count === 0) {
         filteredGoodList.value.delete(goodList.value[index])
       }
+      stores.commit('setFilteredGoodList', Array.from(filteredGoodList.value))
     }
+    watch(
+      () => stores.state.filteredGoodList,
+      (newList) => {
+        filteredGoodList.value = new Set(newList)
 
-    watch(filteredGoodList.value, (newList) => {
-      newList = Array.from(filteredGoodList.value)
-      stores.commit('setFilteredGoodList', newList)
-    })
+        console.log('filteredGoodList', newList)
+      }
+    )
+
+    // watch(
+    //   () => Array.from(filteredGoodList.value),
+    //   (newList) => {
+    //     stores.commit('setFilteredGoodList', newList)
+    //     console.log('setFilteredGoodList', newList)
+    //   }
+    // )
+
     return { goodList, plus, minus, filteredGoodList }
   }
 }

@@ -6,45 +6,47 @@ import stores from '@/stores'
 export default {
   components: {},
   setup() {
-    const onSubmit = () => {
+    const onSubmit = async () => {
       let transformedFilteredGoodList = filteredGoodList.value.map((item) => ({
         user_id: stores.state.signin.id,
         product_id: item.id,
         quantity: item.count
       }))
 
-      const bo = stores.dispatch('axiosSetFilteredGoodList', transformedFilteredGoodList)
+      const bo = await stores.dispatch('axiosSetFilteredGoodList', transformedFilteredGoodList)
       if (bo) {
-        showToast('成功提交')
         goodList.value = []
+        stores.commit('setFilteredGoodList', [])
+        // await stores.dispatch('axiosGetGoodsList')
+        showToast('成功提交')
       } else {
         showToast('提交失败')
       }
-    }
+    } // 提交订单
     const goodList = ref([])
 
-    goodList.value = stores.state.filteredGoodList
+    goodList.value = stores.state.filteredGoodList //将vuex中的filteredGoodList数据赋值给goodList
 
     const plus = (index) => {
       filteredGoodList.value[index].count++
-    }
+    } //增加商品数量
     const minus = (index) => {
       filteredGoodList.value[index].count--
-    }
+    } //减少商品数量
     const allPrises = computed(() => {
       return goodList.value.reduce((total, item) => {
         return total + item.price * item.count
       }, 0)
-    })
+    }) //计算总价
     const filteredGoodList = computed(() => {
       return goodList.value.filter((item) => item.count > 0)
-    })
+    }) //过滤商品列表
     const stopWatch = watch(filteredGoodList, (newList) => {
       stores.commit('setFilteredGoodList', newList)
-    })
+    }) //监听filteredGoodList的变化
     onUnmounted(() => {
       stopWatch()
-    })
+    }) //销毁监听
     const clearShopping = () => {
       showConfirmDialog({
         title: '清除购物车',
@@ -52,11 +54,12 @@ export default {
       })
         .then(() => {
           goodList.value = []
+          stores.commit('setFilteredGoodList', [])
         })
         .catch(() => {
           return
         })
-    }
+    } //清空购物车
     return {
       onSubmit,
       goodList,

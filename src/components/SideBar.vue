@@ -20,7 +20,7 @@ export default {
   },
   emits: ['change'],
   setup(props, { emit }) {
-    const active = ref(0)
+    const active = ref()
     const littleSideList = ref([...props.sideList])
 
     watchEffect(() => {
