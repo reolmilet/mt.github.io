@@ -1,12 +1,9 @@
 import Axios from 'axios'
 import baseURL from './URL'
 import { URLs } from './URL'
-const appkey = 'reol_1714994487599'
+
 const instance = Axios.create({
-  baseURL,
-  params: {
-    appkey
-  }
+  baseURL
 })
 const getSideList = (value) => instance.get(URLs.getSide, { params: { type: value } })
 const getGoodsList = (value) =>

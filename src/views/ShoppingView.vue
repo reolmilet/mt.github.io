@@ -12,7 +12,7 @@ export default {
         product_id: item.id,
         quantity: item.count
       }))
-
+      console.log(transformedFilteredGoodList)
       const bo = await stores.dispatch('axiosSetFilteredGoodList', transformedFilteredGoodList)
       if (bo) {
         goodList.value = []

@@ -11,7 +11,6 @@ export default {
       return stores.state.signin.username
     })
     const matched = computed(() => {
-      console.log(stores.state.match)
       return stores.state.match
     })
     let match = ref(false)

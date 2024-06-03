@@ -16,7 +16,13 @@ import { Field, CellGroup } from 'vant'
 import { Toast } from 'vant'
 import { Cell } from 'vant'
 import { Sidebar, SidebarItem } from 'vant'
+import { Swipe } from 'vant'
+import { SwipeItem } from 'vant'
+import { Lazyload } from 'vant'
 const app = createApp(App)
+app.use(Lazyload)
+app.use(SwipeItem)
+app.use(Swipe)
 app.use(Cell)
 app.use(Toast)
 app.use(CellGroup)

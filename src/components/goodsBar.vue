@@ -72,7 +72,6 @@ export default {
         filteredGoodList.value.add(goodList.value[index])
       }
       stores.commit('setFilteredGoodList', Array.from(filteredGoodList.value))
-      console.log(filteredGoodList.value)
     }
     const minus = (index) => {
       if (goodList.value[index].count > 0) {
@@ -87,8 +86,6 @@ export default {
       () => stores.state.filteredGoodList,
       (newList) => {
         filteredGoodList.value = new Set(newList)
-
-        console.log('filteredGoodList', newList)
       }
     )
 
