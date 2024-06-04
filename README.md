@@ -1,5 +1,4 @@
-这是一个基于vue+vant的商品购物系统的前端部分，他的后端部分是使用javaweb+tomecat+mysql实现的 仓库地址为https://github.com/reolmilet/mtjavaweb
-sql代码也在仓库中
+
 ![18c178527c5e3f2f6ca88833b5d2d7e](https://github.com/reolmilet/mt.github.io/assets/145276452/cf8a7508-f9e6-4fde-9472-d6332bc06e4e)
 ![a2b16ed46bd1d1eb0c737ff230b5274](https://github.com/reolmilet/mt.github.io/assets/145276452/819b1460-8e5e-4a34-a323-914fd9e40bf8)
 ![3b853e820f5e2c60b0eeeee96a81c1b](https://github.com/reolmilet/mt.github.io/assets/145276452/cb66564e-75fd-407f-b320-f529cfc92033)
@@ -9,7 +8,8 @@ sql代码也在仓库中
 
 
 
-
+这是一个基于vue+vant的商品购物系统的前端部分，他的后端部分是使用javaweb+tomecat+mysql实现的 仓库地址为https://github.com/reolmilet/mtjavaweb
+sql代码也在仓库中
 
 # mt-text-vite-4
 
